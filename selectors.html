@@ -1,0 +1,852 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Smart Ambulance Emergency System</title>
+
+<style>
+
+/* =====================================
+   1. GENERAL STYLING
+===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* HEADER */
+
+header {
+    background: #172554;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+header h1 {
+    font-size: 32px;
+}
+
+header p {
+    color: #bfdbfe;
+    margin-top: 8px;
+}
+
+/* =====================================
+   2. NAVIGATION
+===================================== */
+
+nav {
+    background: #1e40af;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+}
+
+/* :HOVER */
+
+nav a:hover {
+    background: white;
+    color: #1e40af;
+    border-radius: 5px;
+}
+
+/* :ACTIVE */
+
+nav a:active {
+    background: red;
+    color: white;
+}
+
+/* :FIRST-CHILD */
+
+nav a:first-child {
+    border-bottom: 3px solid orange;
+}
+
+/* :LAST-CHILD */
+
+nav a:last-child {
+    color: #facc15;
+}
+
+/* =====================================
+   3. MAIN CONTAINER
+===================================== */
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px;
+}
+
+.section {
+    background: white;
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px #00000015;
+}
+
+h2 {
+    color: #1e40af;
+    margin-bottom: 18px;
+}
+
+/* ::BEFORE */
+
+h2::before {
+    content: "🚑 ";
+}
+
+/* ::AFTER */
+
+h2::after {
+    content: " ✓";
+    color: green;
+}
+
+/* =====================================
+   4. DASHBOARD CARDS
+===================================== */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: #eff6ff;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #bfdbfe;
+    transition: 0.3s;
+}
+
+.card h3 {
+    margin-bottom: 12px;
+}
+
+/* :HOVER */
+
+.card:hover {
+    transform: translateY(-8px);
+    background: #dbeafe;
+    box-shadow: 0 5px 15px #00000020;
+}
+
+/* :FIRST-CHILD */
+
+.card:first-child {
+    border-top: 5px solid green;
+}
+
+/* :LAST-CHILD */
+
+.card:last-child {
+    border-top: 5px solid red;
+}
+
+/* =====================================
+   5. BUTTONS
+===================================== */
+
+button {
+    background: #2563eb;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+/* :HOVER */
+
+button:hover {
+    background: #172554;
+}
+
+/* :ACTIVE */
+
+button:active {
+    background: red;
+    transform: scale(0.95);
+}
+
+/* :DISABLED */
+
+button:disabled {
+    background: gray;
+    cursor: not-allowed;
+}
+
+/* =====================================
+   6. AMBULANCE STATUS
+===================================== */
+
+.status {
+    display: inline-block;
+    background: #dcfce7;
+    color: green;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.emergency {
+    background: #fee2e2;
+    color: red;
+}
+
+/* =====================================
+   7. TRAFFIC STATUS TABLE
+===================================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+}
+
+th {
+    background: #1e40af;
+    color: white;
+}
+
+/* :NTH-CHILD */
+
+tbody tr:nth-child(even) {
+    background: #dbeafe;
+}
+
+tbody tr:nth-child(odd) {
+    background: white;
+}
+
+/* =====================================
+   8. EMERGENCY REQUEST FORM
+===================================== */
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: Arial;
+}
+
+/* :FOCUS */
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: blue;
+    outline: 3px solid #bfdbfe;
+    background: #eff6ff;
+}
+
+/* :CHECKED */
+
+input[type="checkbox"]:checked + label {
+    color: green;
+    font-weight: bold;
+}
+
+/* :DISABLED */
+
+input:disabled {
+    background: lightgray;
+}
+
+/* =====================================
+   9. EMERGENCY PRIORITY LIST
+===================================== */
+
+.priority-list {
+    list-style: none;
+}
+
+.priority-list li {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* :FIRST-CHILD */
+
+.priority-list li:first-child {
+    color: red;
+    font-weight: bold;
+}
+
+/* :LAST-CHILD */
+
+.priority-list li:last-child {
+    color: green;
+    font-weight: bold;
+}
+
+/* =====================================
+   10. RESOURCE LINKS
+===================================== */
+
+.resource-link:link {
+    color: blue;
+}
+
+.resource-link:visited {
+    color: purple;
+}
+
+/* =====================================
+   11. PSEUDO ELEMENTS
+===================================== */
+
+/* ::FIRST-LETTER */
+
+.description::first-letter {
+    font-size: 40px;
+    color: red;
+    font-weight: bold;
+}
+
+/* ::SELECTION */
+
+::selection {
+    background: yellow;
+    color: red;
+}
+
+/* =====================================
+   12. FOOTER
+===================================== */
+
+footer {
+    background: #172554;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+/* =====================================
+   13. TABLET MEDIA QUERY
+   Maximum width: 768px
+===================================== */
+
+@media screen and (max-width: 768px) {
+
+    body {
+        background: lightblue;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    nav {
+        gap: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .section {
+        padding: 20px;
+    }
+
+}
+
+/* =====================================
+   14. MOBILE MEDIA QUERY
+   Maximum width: 480px
+===================================== */
+
+@media screen and (max-width: 480px) {
+
+    body {
+        background: lightyellow;
+    }
+
+    header {
+        padding: 20px 10px;
+    }
+
+    header h1 {
+        font-size: 21px;
+    }
+
+    header p {
+        font-size: 13px;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 19px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 7px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>🚑 SMART AMBULANCE SYSTEM</h1>
+
+    <p>
+        AI-Based Emergency Response and Traffic Management
+    </p>
+
+    <p>
+        Detect • Prioritize • Respond
+    </p>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <a href="#home">Home</a>
+
+    <a href="#dashboard">Dashboard</a>
+
+    <a href="#traffic">Traffic</a>
+
+    <a href="#emergency">Emergency</a>
+
+    <a href="#contact">Contact</a>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- HOME SECTION -->
+
+<section class="section" id="home">
+
+    <h2>Welcome to Smart Ambulance</h2>
+
+    <p class="description">
+
+        Smart Ambulance is an AI-driven emergency
+        response system that uses siren recognition,
+        real-time vehicle identification and adaptive
+        traffic signal control to provide faster
+        ambulance movement and improve emergency
+        response efficiency.
+
+    </p>
+
+    <button>Explore System</button>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section class="section" id="dashboard">
+
+    <h2>Emergency Monitoring Dashboard</h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>🚑 Ambulance Status</h3>
+
+            <p class="status">Available</p>
+
+            <p>Ambulance ID: AMB-101</p>
+
+            <button>View Status</button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🔊 Siren Detection</h3>
+
+            <p class="status">Monitoring</p>
+
+            <p>AI-based audio recognition</p>
+
+            <button>View Detection</button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🚦 Traffic Priority</h3>
+
+            <p class="status emergency">Priority Active</p>
+
+            <p>Adaptive traffic signal control</p>
+
+            <button>View Traffic</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TRAFFIC MONITORING -->
+
+<section class="section" id="traffic">
+
+    <h2>Real-Time Traffic Monitoring</h2>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Vehicle ID</th>
+
+                <th>Location</th>
+
+                <th>Signal Status</th>
+
+                <th>Priority</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>AMB-101</td>
+
+                <td>MG Road</td>
+
+                <td>Green</td>
+
+                <td>Emergency</td>
+
+            </tr>
+
+            <tr>
+
+                <td>VEH-102</td>
+
+                <td>Brigade Road</td>
+
+                <td>Red</td>
+
+                <td>Normal</td>
+
+            </tr>
+
+            <tr>
+
+                <td>AMB-103</td>
+
+                <td>Indiranagar</td>
+
+                <td>Green</td>
+
+                <td>Emergency</td>
+
+            </tr>
+
+            <tr>
+
+                <td>VEH-104</td>
+
+                <td>Whitefield</td>
+
+                <td>Yellow</td>
+
+                <td>Normal</td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</section>
+
+
+<!-- EMERGENCY PRIORITY -->
+
+<section class="section">
+
+    <h2>Emergency Priority Levels</h2>
+
+    <ul class="priority-list">
+
+        <li>High Priority - Critical Emergency</li>
+
+        <li>Medium Priority - Urgent Medical Support</li>
+
+        <li>Low Priority - Normal Ambulance Movement</li>
+
+    </ul>
+
+</section>
+
+
+<!-- EMERGENCY REQUEST FORM -->
+
+<section class="section" id="emergency">
+
+    <h2>Emergency Request Form</h2>
+
+    <form>
+
+        <label>Patient Name</label>
+
+        <input type="text"
+        placeholder="Enter patient name">
+
+
+        <label>Contact Number</label>
+
+        <input type="tel"
+        placeholder="Enter contact number">
+
+
+        <label>Emergency Location</label>
+
+        <input type="text"
+        placeholder="Enter your location">
+
+
+        <label>Emergency Type</label>
+
+        <select>
+
+            <option>Select Emergency Type</option>
+
+            <option>Accident</option>
+
+            <option>Heart Attack</option>
+
+            <option>Critical Medical Emergency</option>
+
+            <option>Other</option>
+
+        </select>
+
+
+        <label>Additional Information</label>
+
+        <textarea
+        placeholder="Describe the emergency"
+        rows="4"></textarea>
+
+
+        <input type="checkbox" id="confirm">
+
+        <label for="confirm">
+
+            Confirm Emergency Request
+
+        </label>
+
+        <br><br>
+
+        <button type="submit">
+
+            Request Ambulance
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- SYSTEM STATUS -->
+
+<section class="section">
+
+    <h2>System Status</h2>
+
+    <p>
+
+        AI Siren Recognition:
+        <span class="status">Active</span>
+
+    </p>
+
+    <br>
+
+    <p>
+
+        Vehicle Identification:
+        <span class="status">Operational</span>
+
+    </p>
+
+    <br>
+
+    <p>
+
+        Adaptive Traffic Control:
+        <span class="status">Monitoring</span>
+
+    </p>
+
+    <br>
+
+    <button disabled>
+
+        Maintenance Mode
+
+    </button>
+
+</section>
+
+
+<!-- RESOURCES -->
+
+<section class="section" id="contact">
+
+    <h2>Technology and Resources</h2>
+
+    <p>Technologies used in this project:</p>
+
+    <br>
+
+    <a class="resource-link"
+    href="https://www.python.org/"
+    target="_blank">
+
+        Python
+
+    </a>
+
+    <br><br>
+
+    <a class="resource-link"
+    href="https://www.tensorflow.org/"
+    target="_blank">
+
+        TensorFlow
+
+    </a>
+
+    <br><br>
+
+    <a class="resource-link"
+    href="https://opencv.org/"
+    target="_blank">
+
+        OpenCV
+
+    </a>
+
+</section>
+
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>SMART AMBULANCE SYSTEM</h3>
+
+    <p>
+        AI-Driven Emergency Response and Traffic Management
+    </p>
+
+    <p>
+        © 2026 Smart Ambulance Project
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
+```
